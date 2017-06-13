@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="t77-Bi-r4Q">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hz-fZ-7jv">
+                                <rect key="frame" x="166" y="287" width="43" height="30"/>
+                                <state key="normal" title="Picker"/>
+                                <connections>
+                                    <action selector="clickPicker:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gvl-Y2-Diy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qna-Fr-WZi">
+                                <rect key="frame" x="169" y="208" width="38" height="30"/>
+                                <state key="normal" title="Table"/>
+                                <connections>
+                                    <action selector="clickTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8jZ-98-61d"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1hz-fZ-7jv" firstAttribute="top" secondItem="Qna-Fr-WZi" secondAttribute="bottom" constant="49" id="7Jw-QZ-9rT"/>
+                            <constraint firstItem="1hz-fZ-7jv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8Ze-qX-aiw"/>
+                            <constraint firstItem="1hz-fZ-7jv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Mgn-M7-wfu"/>
+                            <constraint firstItem="1hz-fZ-7jv" firstAttribute="centerX" secondItem="Qna-Fr-WZi" secondAttribute="centerX" id="iwG-su-gDg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Kyq-e6-JOX"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="857" y="438"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cIA-wp-Uu0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t77-Bi-r4Q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="LtA-zu-JvP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4Sf-Dt-X64"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yDM-Kv-44s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="42" y="438"/>
+        </scene>
+    </scenes>
+</document>

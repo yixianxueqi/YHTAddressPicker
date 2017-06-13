@@ -1,0 +1,5 @@
+language: objective-c
+osx_image: xcode8.2
+script:
+- xcodebuild clean -project YHTAddressPicker.xcodeproj -scheme YHTAddressPicker -configuration Debug -sdk iphoneos
+- xcodebuild -project YHTAddressPicker.xcodeproj -scheme YHTAddressPicker -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
