@@ -12,8 +12,9 @@
 typedef NS_ENUM(NSUInteger, YHTAddressIncident) {
 
     YHTAddressIncident_DidSelect = 1,
-    YHTAddressIncident_Cacnel,
-    YHTAddressIncident_finsh
+    YHTAddressIncident_Back,
+    YHTAddressIncident_Finsh,
+    YHTAddressIncident_Cancel
 };
 
 typedef void(^YHTAddressTableBlock)(YHTAddressIncident index, YHTAddressModel *model);

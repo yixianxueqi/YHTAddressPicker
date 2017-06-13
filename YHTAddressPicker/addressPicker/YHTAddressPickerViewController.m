@@ -109,16 +109,30 @@
         if (index == YHTAddressIncident_DidSelect) {
             //选择一个
             [weakSelf.tableModelSelList addObject:model];
-        } else if (index == YHTAddressIncident_Cacnel) {
-            //取消一个
+            NSInteger count = weakSelf.nav.viewControllers.count;
+            if (count == 1) {
+                [weakSelf generateCitySerialize];
+                [weakSelf reloadCityAndRegion];
+            } else {
+                [weakSelf generateRegionSerialize];
+                [weakSelf reloadRegion];
+            }
+        } else if (index == YHTAddressIncident_Back) {
+            //返回
             [weakSelf.tableModelSelList removeObject:model];
-        } else {
+        } else if(index == YHTAddressIncident_Finsh) {
             //完成
-            [weakSelf clickChoose:nil];
+            [weakSelf.tableModelSelList addObject:model];
             [weakSelf.nav dismissViewControllerAnimated:true completion:nil];
+            [weakSelf clickChoose:nil];
+        } else {
+            //取消
+            [weakSelf.nav dismissViewControllerAnimated:true completion:nil];
+            [weakSelf clickCancel:nil];
         }
     };
     tableVC.incidentBlock = block;
+    [self reloadProvinceAndCityAndRegion];
 }
 
 - (void)showPickerView {
@@ -170,9 +184,16 @@
         if (proviceFlag == [weakSelf.provinceSerialize integerValue]) {
             weakSelf.provinceList = list;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.pickerView reloadComponent:0];
-                [weakSelf.pickerView selectRow:0 inComponent:0 animated:true];
-                [weakSelf reloadCityAndRegion];
+                if (weakSelf.showType == YHTShowType_Picker) {
+                    //picker
+                    [weakSelf.pickerView reloadComponent:0];
+                    [weakSelf.pickerView selectRow:0 inComponent:0 animated:true];
+                    [weakSelf reloadCityAndRegion];
+                } else {
+                    //table
+                    YHTAddressTableContentViewController *tablVC = [weakSelf.nav.viewControllers firstObject];
+                    tablVC.list = weakSelf.provinceList;
+                }
             });
         }
     };
@@ -190,14 +211,30 @@
         if (cityFlag == [weakSelf.citySerialize integerValue]) {
             weakSelf.cityList = list;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.pickerView reloadComponent:1];
-                [weakSelf.pickerView selectRow:0 inComponent:1 animated:true];
-                [weakSelf reloadRegion];
+                if (weakSelf.showType == YHTShowType_Picker) {
+                    //picker
+                    [weakSelf.pickerView reloadComponent:1];
+                    [weakSelf.pickerView selectRow:0 inComponent:1 animated:true];
+                    [weakSelf reloadRegion];
+                } else {
+                    //table
+                    YHTAddressTableContentViewController *tablVC = [weakSelf.nav.viewControllers firstObject];
+                    YHTAddressTableContentViewController *subTableVC = [[YHTAddressTableContentViewController alloc] init];
+                    subTableVC.list = weakSelf.cityList;
+                    subTableVC.incidentBlock = tablVC.incidentBlock;
+                    [weakSelf.nav pushViewController:subTableVC animated:true];
+                }
             });
         }
     };
-    NSInteger index = [self.pickerView selectedRowInComponent:0];
-    [self.dateSource getCityByProvince:self.provinceList[index] list:self.cityListBlock];
+    YHTAddressModel *model;
+    if (self.showType == YHTShowType_Picker) {
+        NSInteger index = [self.pickerView selectedRowInComponent:0];
+        model = self.provinceList[index];
+    } else {
+        model = [self.tableModelSelList firstObject];
+    }
+    [self.dateSource getCityByProvince:model list:self.cityListBlock];
 }
 
 // 刷新区域列表
@@ -211,13 +248,29 @@
         if (regionFlag == [weakSelf.regionSerialize integerValue]) {
             weakSelf.regionList = list;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.pickerView reloadComponent:2];
-                [weakSelf.pickerView selectRow:0 inComponent:2 animated:true];
+                if (weakSelf.showType == YHTShowType_Picker) {
+                    //picker
+                    [weakSelf.pickerView reloadComponent:2];
+                    [weakSelf.pickerView selectRow:0 inComponent:2 animated:true];
+                } else {
+                    //table
+                    YHTAddressTableContentViewController *tablVC = [weakSelf.nav.viewControllers firstObject];
+                    YHTAddressTableContentViewController *subTableVC = [[YHTAddressTableContentViewController alloc] init];
+                    subTableVC.list = weakSelf.regionList;
+                    subTableVC.incidentBlock = tablVC.incidentBlock;
+                    [weakSelf.nav pushViewController:subTableVC animated:true];
+                }
             });
         }
     };
-    NSInteger index = [self.pickerView selectedRowInComponent:1];
-    [self.dateSource getRegionByCity:self.cityList[index] list:self.regionListBlock];
+    YHTAddressModel *model;
+    if (self.showType == YHTShowType_Picker) {
+        NSInteger index = [self.pickerView selectedRowInComponent:1];
+        model = self.cityList[index];
+    } else {
+        model = [self.tableModelSelList lastObject];
+    }
+    [self.dateSource getRegionByCity:model list:self.regionListBlock];
 }
 
 // 省份序列化

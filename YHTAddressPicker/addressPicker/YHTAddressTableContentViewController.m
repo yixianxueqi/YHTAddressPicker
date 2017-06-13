@@ -34,6 +34,17 @@
         str = @"区域";
     }
     self.navigationItem.title = str;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(clickCancel)];
+}
+
+#pragma mark - barbtn click
+
+//点击取消
+- (void)clickCancel {
+
+    if (self.incidentBlock) {
+        self.incidentBlock(YHTAddressIncident_Cancel, nil);
+    }
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
@@ -49,12 +60,23 @@
     YHTAddressModel *model = self.list[indexPath.row];
     cell.textLabel.text = model.name;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSLog(@"tabel select %ld", indexPath.row);
+    NSInteger count = self.navigationController.viewControllers.count;
+    YHTAddressIncident incident;
+    if (count == 3) {
+        incident = YHTAddressIncident_Finsh;
+    } else {
+        incident = YHTAddressIncident_DidSelect;
+    }
+    YHTAddressModel *model = self.list[indexPath.row];
+    if (self.incidentBlock) {
+        self.incidentBlock(incident, model);
+    }
 }
 
 #pragma mark - getter/setter
@@ -70,5 +92,10 @@
     return _tableView;
 }
 
+- (void)setList:(NSArray<YHTAddressModel *> *)list {
+
+    _list = list;
+    [self.tableView reloadData];
+}
 
 @end
