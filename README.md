@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, YHTShowType) {
 
 数据源：
 
-本控件自带有一份省市区的plist文件，所以默认的数据源为该plist文件，若用户需要更改数据源，
+本控件自带有一份省市区的plist文件，所以存在一个默认实现了协议的数据源类YHTAddressDefaultDataSource，控制器初始化时默认使用了该类作为数据源代理， 若用户需要更改数据源，
 只需更改其代理对象dateSource即可。
 
 代理对象需要满足YHTAddressDataSource协议
