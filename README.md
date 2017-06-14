@@ -85,3 +85,7 @@ typedef NS_ENUM(NSUInteger, YHTShowType) {
 1. 将addressPicker文件夹拖入项目使用
 2. cocopods安装
 
+```
+pod 'YHTAddressPicker', '0.1'
+```
+
