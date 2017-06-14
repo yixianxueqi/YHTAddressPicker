@@ -67,12 +67,18 @@ typedef NS_ENUM(NSUInteger, YHTShowType) {
 
 注意：
 
+关于UI：
 该控件底部弹出picker选择器时，不论是否存在tabbar都可以正常展示，若视图底部存在显示不完整或留白，请检查父控制器的以下属性：
 
 ```
     self.automaticallyAdjustsScrollViewInsets = false;
     self.edgesForExtendedLayout = UIRectEdgeNone;
 ```
+
+关于数据正确性：
+在使用picker进行数据选择时，有一种情况需要注意，可能会导致选择的数据错误结果。
+例： 当用户在滑动省份时（惯性滑动，还没有明确选择时），点击确定按钮获取地址选择结果时，由于控件是在pickerView：didSelectRow：inComponent：代理方法被唤起时，才去刷新其余需要刷新的列，而在此种情况，该代理方法还没有被唤起执行，直到它减速将要停止时才明确是哪一行被选取，才能据此刷新。因此，其余列使用的还是滑动前的默认数据，这时获得的结果是个紊乱的结果。开发人员需要谨慎去处理此特殊情况（一般正常操作不会出现，但需要提防这种充满恶意的操作），可以在结果获取后校验是否合法。
+
 
 ### 安装
 

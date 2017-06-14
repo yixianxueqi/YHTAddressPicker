@@ -111,10 +111,8 @@
             [weakSelf.tableModelSelList addObject:model];
             NSInteger count = weakSelf.nav.viewControllers.count;
             if (count == 1) {
-                [weakSelf generateCitySerialize];
                 [weakSelf reloadCityAndRegion];
             } else {
-                [weakSelf generateRegionSerialize];
                 [weakSelf reloadRegion];
             }
         } else if (index == YHTAddressIncident_Back) {
@@ -176,6 +174,7 @@
 // 刷新省份列表、城市列表和区域列表
 - (void)reloadProvinceAndCityAndRegion {
 
+    [self generateProvinceSerialize];
     __weak typeof(self) weakSelf = self;
     NSInteger proviceFlag = [self.provinceSerialize integerValue];
     self.provinceListBlock = ^(NSArray<YHTAddressModel *> *list){
@@ -203,6 +202,7 @@
 // 刷新城市列表和区域列表
 - (void)reloadCityAndRegion {
 
+    [self generateCitySerialize];
     __weak typeof(self) weakSelf = self;
     NSInteger cityFlag = [self.citySerialize integerValue];
     self.cityListBlock = ^(NSArray<YHTAddressModel *> *list){
@@ -240,6 +240,7 @@
 // 刷新区域列表
 - (void)reloadRegion {
 
+    [self generateRegionSerialize];
     __weak typeof(self) weakSelf = self;
     NSInteger regionFlag = [self.regionSerialize integerValue];
     self.regionListBlock = ^(NSArray<YHTAddressModel *> *list){
@@ -369,8 +370,8 @@
         label.textColor = [UIColor blackColor];
         label.font = [UIFont systemFontOfSize:21.0];
         label.textAlignment = NSTextAlignmentCenter;
-        [label sizeToFit];
         label.text = name;
+        [label sizeToFit];
     }
     return label;
 }
@@ -378,10 +379,8 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
     if (component == 0) {
-        [self generateCitySerialize];
         [self reloadCityAndRegion];
     } else if (component == 1) {
-        [self generateRegionSerialize];
         [self reloadRegion];
     }
 }
