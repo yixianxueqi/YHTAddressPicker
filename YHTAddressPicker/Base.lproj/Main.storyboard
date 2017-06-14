@@ -35,16 +35,42 @@
                                     <action selector="clickTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8jZ-98-61d"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="table" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d6Y-s5-BPS">
+                                <rect key="frame" x="88" y="158" width="200" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="4Ow-Ke-l6W"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="picker" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lM7-qN-xxk">
+                                <rect key="frame" x="88" y="108" width="200" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="e1j-cf-EIz"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="d6Y-s5-BPS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="14m-Nn-AiS"/>
                             <constraint firstItem="1hz-fZ-7jv" firstAttribute="top" secondItem="Qna-Fr-WZi" secondAttribute="bottom" constant="49" id="7Jw-QZ-9rT"/>
                             <constraint firstItem="1hz-fZ-7jv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8Ze-qX-aiw"/>
                             <constraint firstItem="1hz-fZ-7jv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Mgn-M7-wfu"/>
+                            <constraint firstItem="lM7-qN-xxk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="huS-rF-T2A"/>
                             <constraint firstItem="1hz-fZ-7jv" firstAttribute="centerX" secondItem="Qna-Fr-WZi" secondAttribute="centerX" id="iwG-su-gDg"/>
+                            <constraint firstItem="d6Y-s5-BPS" firstAttribute="top" secondItem="lM7-qN-xxk" secondAttribute="bottom" constant="20" id="qVM-W5-mYx"/>
+                            <constraint firstItem="Qna-Fr-WZi" firstAttribute="top" secondItem="d6Y-s5-BPS" secondAttribute="bottom" constant="20" id="rRM-93-QR0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Kyq-e6-JOX"/>
+                    <connections>
+                        <outlet property="pickerTextField" destination="lM7-qN-xxk" id="dHn-nL-Kq0"/>
+                        <outlet property="tableTextField" destination="d6Y-s5-BPS" id="shW-xh-D2E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -55,7 +81,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t77-Bi-r4Q" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="LtA-zu-JvP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="LtA-zu-JvP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
